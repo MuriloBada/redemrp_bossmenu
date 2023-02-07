@@ -26,24 +26,6 @@ Citizen.CreateThread(function()
     end
 end)
 
-RegisterCommand("duty", function(source, args)
-    local Player = RedEM.GetPlayer(source)
-    local OnFirstLogin = RedEM.IsOnFirstLogin(source)
-    if Config.Jobs[Player.job].HasDuty then
-        if OnFirstLogin then
-            if os.time() - DutyCommandTimer[source] <= 300 then
-                TriggerClientEvent("redemrp_bossmenu:client:ToggleDuty", source)
-            else
-                RedEM.Functions.NotifyRight("Duty command expired, use job menu.", 3000)
-            end
-        else
-            RedEM.Functions.NotifyRight("Duty command expired, use job menu.", 3000)
-        end
-    else
-        RedEM.Functions.NotifyRight("Your employer does not require you to go on duty.", 3000)
-    end
-end)
-
 RegisterCommand("quitjob", function(source, args)
     local Player = RedEM.GetPlayer(source)
     if Player then
@@ -57,9 +39,6 @@ end)
 
 AddEventHandler("redemrp:playerLoaded", function(source, user)
     TriggerClientEvent("redemrp_bossmenu:client:ReceiveJob", source, user.getJob(), user.getJobgrade())
-    if RedEM.IsOnFirstLogin(source) then
-        DutyCommandTimer[source] = os.time()
-    end
 end)
 
 function DoPay()
