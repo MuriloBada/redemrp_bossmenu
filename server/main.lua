@@ -12,30 +12,30 @@ Citizen.CreateThread(function()
     print("Job ledgers loaded.")
 end)
 
-Citizen.CreateThread(function()
-    while true do
-        Wait(900000) -- 15 minutes
-        DoPay()
-    end
-end)
+-- Citizen.CreateThread(function()
+--     while true do
+--         Wait(900000) -- 15 minutes
+--         DoPay()
+--     end
+-- end)
 
-Citizen.CreateThread(function()
-    while true do
-        Wait(900000 * 4) -- 15 minutes * 4 = 1 Hour
-        DoPublicPay()
-    end
-end)
+-- Citizen.CreateThread(function()
+--     while true do
+--         Wait(900000 * 4) -- 15 minutes * 4 = 1 Hour
+--         DoPublicPay()
+--     end
+-- end)
 
-RegisterCommand("quitjob", function(source, args)
-    local Player = RedEM.GetPlayer(source)
-    if Player then
-        if Player.job ~= "unemployed" then
-            Player.SetJob("unemployed")
-            Player.SetJobGrade(0)
-            RedEM.Functions.NotifyRight(source, "You are now unemployed!", 5000)
-        end
-    end
-end)
+-- RegisterCommand("quitjob", function(source, args)
+--     local Player = RedEM.GetPlayer(source)
+--     if Player then
+--         if Player.job ~= "unemployed" then
+--             Player.SetJob("unemployed")
+--             Player.SetJobGrade(0)
+--             RedEM.Functions.NotifyRight(source, "You are now unemployed!", 5000)
+--         end
+--     end
+-- end)
 
 AddEventHandler("redemrp:playerLoaded", function(source, user)
     TriggerClientEvent("redemrp_bossmenu:client:ReceiveJob", source, user.getJob(), user.getJobgrade())
